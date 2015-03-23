@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="rest/files/upload" method="POST">
+		<p>
+			<input type="file" id="uploadFile" name="uploadedFile" size="3"
+				placeholder="Choose A File" />
+		</p>
+		<p>
+			<input type="submit" value="Upload it" id="uploadFileBtn" />
+		</p>
+	</form>
+
+
+	<form id="importForm" action="rest/files/import" method="POST" enctype="multipart/form-data">
+		<input type="submit" value="Start Import" id="uploadFileBtn" />
+	</form>
+</body>
+</html>
