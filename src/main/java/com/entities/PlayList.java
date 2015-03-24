@@ -28,9 +28,9 @@ public class PlayList {
 	private List<Track> tracks = new ArrayList<>();
 	
 	@ManyToOne
-	@JoinColumn(name = "user_pid")
+	@JoinColumn(name = "lib_pid")
 	@JsonBackReference
-	private User userPlayList;
+	private Library userPlayList;
 	
 	//Method to add Tracks to PlayList
 	public void addTrackToPlayList(Track t){
@@ -63,11 +63,11 @@ public class PlayList {
 	}
 
 	@XmlTransient
-	public User getUserPlayList() {
+	public Library getUserPlayList() {
 		return userPlayList;
 	}
 
-	public void setUserPlayList(User userPlayList) {
+	public void setUserPlayList(Library userPlayList) {
 		this.userPlayList = userPlayList;
 	}
 

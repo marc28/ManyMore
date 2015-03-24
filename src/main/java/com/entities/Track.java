@@ -33,9 +33,9 @@ public class Track {
 	private List<PlayList> playlists = new ArrayList<PlayList>();
 	
 	@ManyToOne
-	@JoinColumn(name = "user_tid")
+	@JoinColumn(name = "lib_tid")
 	@JsonBackReference
-	private User userTrack;
+	private Library userTrack;
 	
 	
 	public int getTrackID() {
@@ -96,13 +96,16 @@ public class Track {
 	}
 
 	@XmlTransient
-	public User getUserTrack() {
+	public Library getUserTrack() {
 		return userTrack;
 	}
 
-	public void setUserTrack(User userTrack) {
+	public void setUserTrack(Library userTrack) {
 		this.userTrack = userTrack;
 	}
+
+	
+	
 	
 	
 }

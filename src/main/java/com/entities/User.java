@@ -1,29 +1,27 @@
 package com.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 
 	@Id
-	@Column
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column (name="userId")
 	private int libraryid;
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy="userTrack",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<Track> tracks = new ArrayList<>();
+	@OneToOne(fetch=FetchType.LAZY,mappedBy="user")
+	private Library library; //join user To Library
 	
-	@OneToMany(mappedBy="userPlayList",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private List<PlayList> playlist = new ArrayList<>();
+	
 
 	public int getLibraryid() {
 		return libraryid;
@@ -49,24 +47,6 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Track> getTracks() {
-		return tracks;
-	}
-
-	public void setTracks(List<Track> tracks) {
-		this.tracks = tracks;
-	}
-
-	public List<PlayList> getPlaylist() {
-		return playlist;
-	}
-
-	public void setPlaylist(List<PlayList> playlist) {
-		this.playlist = playlist;
-	}
-
-
-	
 	
 	
 }

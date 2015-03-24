@@ -10,6 +10,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import com.entities.Library;
 import com.entities.PlayList;
 import com.entities.Track;
 import com.entities.User;
@@ -27,10 +28,8 @@ public class ReadInXML {
 	public ArrayList<Track> getAllTrackInoframtion() {
 		Document document;
 		Track track = new Track();
-		User user = new User();
-		user.setEmail("marc@mail.com");
-		user.setLibraryid(1);
-		user.setPassword("1234");
+		Library lib = new Library();
+		lib.setLibID(1);
 		ArrayList<Track> tracks = new ArrayList<Track>();
 		try {
 			document = (Document) builder.build(xmlFile);
@@ -42,7 +41,7 @@ public class ReadInXML {
 			// Getting all the 'dict' children of secondDict
 			List<Element> listSecondDicts = secondDict.getChildren("dict");
 			for (int m = 0; m < listSecondDicts.size(); m++) {
-				track.setUserTrack(user);
+				track.setUserTrack(lib);
 				int listSize = listSecondDicts.get(m).getChildren().size();
 				List<Element> trialFirst = listSecondDicts.get(m).getChildren();
 				for (int i = 0; i < listSize - 1; i += 2) {
@@ -81,10 +80,8 @@ public class ReadInXML {
 		ArrayList<Track> trackList = getAllTrackInoframtion();
 		PlayList playlist = new PlayList();
 		Document document;
-		User user = new User();
-		user.setEmail("marc@mail.com");
-		user.setLibraryid(1);
-		user.setPassword("1234");
+		Library user = new Library();
+		user.setLibID(1);
 	
 
 		try {
