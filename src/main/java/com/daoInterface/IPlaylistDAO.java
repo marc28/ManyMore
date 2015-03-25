@@ -14,4 +14,5 @@ public interface IPlaylistDAO {
 
 	void insertPlayListInformation(Collection<PlayList> playlist);
 	Collection<PlayList> returnAllPlaylistsNames(int id);
+	Collection<PlayList> getAllPlayListsWithTracks();
 }

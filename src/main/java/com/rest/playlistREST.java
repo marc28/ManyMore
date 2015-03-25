@@ -25,4 +25,9 @@ public class playlistREST {
 		return service.returnAllPlaylistsNames(id);
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<PlayList> getAllPlayListsWithTracks(){
+		return service.getAllPlayListsWithTracks();
+	}
 }

@@ -37,6 +37,11 @@ public class PlaylistService implements IPlaylistService{
 		this.dao = dao;
 	}
 
+	@Override
+	public Collection<PlayList> getAllPlayListsWithTracks() {
+		return dao.getAllPlayListsWithTracks();
+	}
+
 	
 
 }

@@ -15,4 +15,5 @@ public interface IPlaylistService {
 
 	public void insertPlayListInformation(Collection<PlayList> playlists);
 	Collection<PlayList> returnAllPlaylistsNames(int id);
+	public Collection<PlayList> getAllPlayListsWithTracks();
 }
