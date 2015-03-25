@@ -23,7 +23,7 @@ function handleResponseJQuery(myData) {
 	for (var i = 0; i < myData.length; i++) {
 
 		$('#table-body').append(
-				"<tr>" + "<td>" + myData[i].trackID + "</td>" + "<td>"
+				"<tr onclick='deletMe(this)'>" + "<td>" + myData[i].trackID + "</td>" + "<td>"
 						+ myData[i].name + "</td>" + "<td>"
 						+ myData[i].artist + "</td>" + "<td>"
 						+ myData[i].album + "</td>" + "<td>"
@@ -32,3 +32,18 @@ function handleResponseJQuery(myData) {
 	}
 	;
 }
+
+
+function deletMe(el) {
+	   var trackid = el.cells[0].textContent;
+	   $.ajax({
+			  type: 'GET',
+			  url: 'rest/tracks/tid?tid='+ trackid,
+			  success:function(){
+				  alert("yes");
+			  },
+			  contentType: 'application/json'
+		});
+	}
+
+

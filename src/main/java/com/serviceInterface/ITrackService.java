@@ -16,4 +16,5 @@ public interface ITrackService {
 	public void addTrackToDataBase(Track track);
 	public Collection<Track> getAllTracks();
 	public void insertTrackInformation(Collection<Track> tracks);
+	public void removeTrack(int id);
 }

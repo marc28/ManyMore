@@ -16,4 +16,6 @@ public interface ITrackDAO {
 	public Collection<Track> getAllTracks();
 
 	public void insertTrackInformation(Collection<Track> tracks);
+	
+	public void removeTrack(int id);
 }

@@ -2,7 +2,10 @@
  * 
  */
 
-$('#showPlaylists').click(function(){
+/*$('#showPlaylists').click(function(){
+	getTheInfo();
+});*/
+$( document ).ready(function() {
 	getTheInfo();
 });
 

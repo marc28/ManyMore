@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.daoInterface.ITrackDAO;
+import com.entities.PlayList;
 import com.entities.Track;
 
 @Local
@@ -49,6 +50,14 @@ public class TrackDAO implements ITrackDAO{
 			System.out.println("Inserted: " + (count++));
 			}
 		}
+		
+	}
+
+	@Override
+	public void removeTrack(int id) {
+		Track removetrack = (Track) em.createQuery("from Track t where t.id = :id").setParameter("id",id).getSingleResult();
+		System.out.println(removetrack.getName());
+		em.remove(removetrack);
 		
 	}
 }

@@ -17,9 +17,12 @@ $('#addUserBut').click(function(){
         }),
 	    error:function(){
 	    	alert("Error");
+	    	clearAll();
 	    },
 	    success: function() {
 	    	alert("User Added");
+	    	clearAll();
+	    	window.location.href="login.html";
 	    }
 	});
 });
@@ -37,13 +40,21 @@ $('#loginBtn').click(function(){
         }),
 	    error:function(){
 	    	alert("Problem");
+	    	clearAll();
 	    },
 	    success: function(data) {
 	    	if(data == null){
 	    		alert("Problem");
+	    		clearAll();
 	    	}else{
 	    		alert("Logged In");
+	    		window.location.href ="viewtracks.html";
 	    	}
 	    }
 	});
 });
+
+function clearAll(){
+	$('#emailLogin').val('');
+	$('#pwdLogin').val('');
+}

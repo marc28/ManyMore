@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.entities.Track;
@@ -24,10 +25,19 @@ public class TrackREST {
 		return service.getAllTracks();
 	}
 	
-	@POST
+	@GET
+	@Path("/tid")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void removeTrack(@QueryParam("tid") int id){
+		service.removeTrack(id);
+	}
+	
+	/*@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	public void addTrack(Track track){
 		service.addTrackToDataBase(track);
-	}
+	}*/
+	
+	
 
 }

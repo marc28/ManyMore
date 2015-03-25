@@ -47,4 +47,12 @@ public class TrackService implements ITrackService{
 		
 	}
 
+	/**
+	 * Method to delete Track
+	 */
+	@Override
+	public void removeTrack(int id) {
+		dao.removeTrack(id);		
+	}
+
 }
