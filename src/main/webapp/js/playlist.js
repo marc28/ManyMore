@@ -17,15 +17,46 @@ function getAllPlayListTrackInfo() {
 
 function handleResponseJQuery3(myData) {
 
-	for (var i = 0; i < myData.length; i++) {
+	for (var i = 0; i < 200; i++) {
 		$('#table-body').append("<tr>");
 		for(var j = 0;j<5;j++){
 			$('#table-body').append(
 					"<td>" + myData[i][j] + "</td>");
 		}
+		$('#table-body').append("<td><button onclick='edit(this)'class='btn btn-warning'>Edit</button></td>");
+		$('#table-body').append("<td><button onclick='saveme(this)'class='btn btn-success'>Save</button></td>");
+		$('#table-body').append("<td><button onclick='deletMe(this)' class='btn btn-danger'>Delete</button></td>");
 		$('#table-body').append("</tr>");
 	}
 }
+
+function edit(me){
+	var parent = me.parentNode.parentNode;
+	var tdname = parent.children[1]; //get the user name node
+	tdname.setAttribute("contentEditable", true);
+}
+
+
+function saveme(me){
+	var parent = me.parentNode.parentNode;
+	var tdname = parent.children[1]; //get the user name node
+	tdname.setAttribute("contentEditable", false);
+	alert(tdname.innerHTML);
+}
+
+
+function deletMe(el) {
+	   var trackid = el.parentNode.parentNode.cells[0].textContent;
+	   $.ajax({
+			  type: 'GET',
+			  url: 'rest/tracks/tid?tid='+ trackid,
+			  success:function(){
+				  alert(trackid + " has been deleted");
+				  location.reload();
+			  },
+			  contentType: 'application/json'
+		});
+	}
 
 /*
  * $('#showPlaylists').click(function(){ getTheInfo(); });
