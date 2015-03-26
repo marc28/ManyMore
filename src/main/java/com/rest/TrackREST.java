@@ -32,11 +32,13 @@ public class TrackREST {
 		service.removeTrack(id);
 	}
 	
-	/*@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	public void addTrack(Track track){
-		service.addTrackToDataBase(track);
-	}*/
+	@GET
+	@Path("/editandsave")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void saveEditTrack(@QueryParam("tid") int id, @QueryParam("name") String name,
+			@QueryParam("artist") String artist, @QueryParam("album") String album){
+		service.saveEditTrack(id,name,artist,album);
+	}
 	
 	
 

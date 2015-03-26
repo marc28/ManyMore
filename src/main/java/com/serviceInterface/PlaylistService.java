@@ -25,10 +25,17 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public Collection<PlayList> returnAllPlaylistsNames(int id) {
-		return dao.returnAllPlaylistsNames(id);
+	public Collection<PlayList> returnAllPlaylistsNames() {
+		return dao.returnAllPlaylistsNames();
 	}
 
+	@Override
+	public void removePlaylist(int id) {
+		 dao.removePlaylist(id);
+	}
+	
+	
+	//Getters and setters
 	public IPlaylistDAO getDao() {
 		return dao;
 	}
@@ -41,6 +48,14 @@ public class PlaylistService implements IPlaylistService{
 	public Collection<PlayList> getAllPlayListsWithTracks() {
 		return dao.getAllPlayListsWithTracks();
 	}
+
+	@Override
+	public void saveEditPlaylist(int id, String name) {
+		dao.saveEditPlaylist(id,name);
+		
+	}
+
+	
 
 	
 

@@ -60,4 +60,16 @@ public class TrackDAO implements ITrackDAO{
 		em.remove(removetrack);
 		
 	}
+
+	@Override
+	public void saveEditTrack(int id,String name,String artist,String album) {
+		Track track = (Track) em.createQuery("from Track t where t.id = :id").setParameter("id",id).getSingleResult();
+		track.setName(name);
+		track.setArtist(artist);
+		track.setAlbum(album);
+		System.out.println(name);
+		em.merge(track);
+		System.out.println("name has been changed!!");
+		
+	}
 }

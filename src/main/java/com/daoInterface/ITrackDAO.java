@@ -18,4 +18,6 @@ public interface ITrackDAO {
 	public void insertTrackInformation(Collection<Track> tracks);
 	
 	public void removeTrack(int id);
+
+	public void saveEditTrack(int id,String name,String artist,String album);
 }

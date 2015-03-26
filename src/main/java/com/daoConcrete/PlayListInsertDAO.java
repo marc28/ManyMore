@@ -35,28 +35,17 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<PlayList> returnAllPlaylistsNames(int id) {
-		return (Collection<PlayList>) em
+	public Collection<PlayList> returnAllPlaylistsNames() {
+		/*return (Collection<PlayList>) em
 				.createQuery("from PlayList p where p.id = :id")
-				.setParameter("id", id).getResultList();
-
+				.setParameter("id", id).getResultList();*/
+		return (Collection<PlayList>)em.createQuery("from PlayList").getResultList();
 	}
 
-	/**
-	 * 
-	 * select playlist.name, playlist.playlistId, track.name AS TRACK_NAME,
-	 * track.album, track.artist from playlist,track, playlist_track where
-	 * playlist.playlistId = playlist_track.PLAY_ID AND track.trackID =
-	 * playlist_track.TRACK_ID order by playlist.playlistId;
-	 * 
-	 * "select p.name, p.playlistId, t.name,t.album, t.artist"
-				+ " FROM Track t, PlayList p, PlayList.tracks pt"
-				+ " where p.playlistId = pt.PLAY_ID"
-				+ " AND t.trackID = pt.TRACK_ID ORDER BY p.playlistId"
-	 * 
-	 */
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<PlayList> getAllPlayListsWithTracks() {
 		return (Collection<PlayList>) em.createQuery("select p.name, p.playlistId, t.name,t.album, t.artist"
@@ -64,5 +53,23 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 				+ " inner join p.tracks t ORDER BY p.playlistId"
 				).getResultList();
 	}
+
+	@Override
+	public void removePlaylist(int id) {
+		PlayList playlist = (PlayList)em.createQuery("from PlayList p where p.id = :id").setParameter("id", id).getSingleResult();
+		//System.out.println(playlist.getName());
+		em.remove(playlist);
+		
+	}
+
+	@Override
+	public void saveEditPlaylist(int id, String name) {
+		PlayList playlist = (PlayList)em.createQuery("from PlayList p where p.id = :id").setParameter("id", id).getSingleResult();
+		playlist.setName(name);
+		em.merge(playlist);
+		System.out.println("Playlist has been added");
+	}
+
+	
 
 }

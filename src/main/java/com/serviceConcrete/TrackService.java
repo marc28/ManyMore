@@ -55,4 +55,10 @@ public class TrackService implements ITrackService{
 		dao.removeTrack(id);		
 	}
 
+	@Override
+	public void saveEditTrack(int id,String name,String artist,String album) {
+		dao.saveEditTrack(id,name,artist,album);
+		
+	}
+
 }

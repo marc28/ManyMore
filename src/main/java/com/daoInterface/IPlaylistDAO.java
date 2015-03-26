@@ -13,6 +13,8 @@ import com.entities.PlayList;
 public interface IPlaylistDAO {
 
 	void insertPlayListInformation(Collection<PlayList> playlist);
-	Collection<PlayList> returnAllPlaylistsNames(int id);
+	Collection<PlayList> returnAllPlaylistsNames();
 	Collection<PlayList> getAllPlayListsWithTracks();
+	void removePlaylist(int id);
+	void saveEditPlaylist(int id, String name);
 }

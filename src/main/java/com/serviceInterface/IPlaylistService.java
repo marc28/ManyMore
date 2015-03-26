@@ -14,6 +14,8 @@ import com.entities.PlayList;
 public interface IPlaylistService {
 
 	public void insertPlayListInformation(Collection<PlayList> playlists);
-	Collection<PlayList> returnAllPlaylistsNames(int id);
+	Collection<PlayList> returnAllPlaylistsNames();
 	public Collection<PlayList> getAllPlayListsWithTracks();
+	public void removePlaylist(int id);
+	public void saveEditPlaylist(int id, String name);
 }

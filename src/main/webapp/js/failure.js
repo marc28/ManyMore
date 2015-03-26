@@ -39,16 +39,38 @@ function handleResponseJQuery(myData) {
 
 function edit(me){
 	var parent = me.parentNode.parentNode;
-	var tdname = parent.children[1]; //get the user name node
-	tdname.setAttribute("contentEditable", true);
+	var tdnameNode = parent.children[1]; //get the user name node
+	var tdArtistNode = parent.children[2];
+	var tdAlbumNode = parent.children[3];
+	tdnameNode.setAttribute("contentEditable", true);
+	tdArtistNode.setAttribute("contentEditable", true);
+	tdAlbumNode.setAttribute("contentEditable", true);
 }
 
 
 function saveme(me){
 	var parent = me.parentNode.parentNode;
-	var tdname = parent.children[1]; //get the user name node
-	tdname.setAttribute("contentEditable", false);
-	alert(tdname.innerHTML);
+	var tdnameNode = parent.children[1]; //get the user name node
+	var name = tdnameNode.innerHTML; //name value
+	var tdArtistNode = parent.children[2];
+	var artist = tdArtistNode.innerHTML; //artist value
+	var tdAlbumNode = parent.children[3];
+	var album = tdAlbumNode.innerHTML; //album value
+	
+	tdnameNode.setAttribute("contentEditable", false);
+	tdArtistNode.setAttribute("contentEditable", false);
+	tdAlbumNode.setAttribute("contentEditable", false);
+	var trackid = me.parentNode.parentNode.cells[0].textContent;
+	alert(trackid + ", " + name + ", " + artist + ", " + album);
+	$.ajax({
+		  type: 'GET',
+		  url: 'rest/tracks/editandsave?tid='+ trackid+"&name=" + name + "&artist="+artist+"&album="+album,
+		  success:function(){
+			  alert(trackid + " has been changed");
+			  location.reload();
+		  },
+		  contentType: 'application/json'
+	});
 }
 
 
