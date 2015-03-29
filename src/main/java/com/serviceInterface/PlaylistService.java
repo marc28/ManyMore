@@ -66,6 +66,12 @@ public class PlaylistService implements IPlaylistService{
 		
 	}
 
+	@Override
+	public void removeTrackFromPlaylist(String trackName, String playlistName) {
+		dao.removeTrackFromPlaylist(trackName,playlistName);
+		
+	}
+
 	
 
 	

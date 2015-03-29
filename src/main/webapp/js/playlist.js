@@ -23,10 +23,10 @@ function handleResponseJQuery3(myData) {
 			$('#table-body').append(
 					"<td>" + myData[i][j] + "</td>");
 		}
-		$('#table-body').append("<td><button onclick='edit(this)'class='btn btn-warning'>Edit</button></td>");
+		/*$('#table-body').append("<td><button onclick='edit(this)'class='btn btn-warning'>Edit</button></td>");
 		$('#table-body').append("<td><button onclick='saveme(this)'class='btn btn-success'>Save</button></td>");
 		$('#table-body').append("<td><button onclick='deletMe(this)' class='btn btn-danger'>Delete</button></td>");
-		$('#table-body').append("</tr>");
+		$('#table-body').append("</tr>");*/
 	}
 }
 

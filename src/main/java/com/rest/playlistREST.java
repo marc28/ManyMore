@@ -40,6 +40,14 @@ public class playlistREST {
 		service.insertTrackIntoPlayList(trackName, playlistName);
 	}
 	
+	@GET
+	@Path("/removeTrackFromPlaylist")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void removeTrackFromPlaylist(@QueryParam("trackname") String trackName, @QueryParam("playlist") String playlistName){
+		
+		service.removeTrackFromPlaylist(trackName, playlistName);
+	}
+	
 	
 	@GET
 	@Path("/namesdropdown")

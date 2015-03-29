@@ -33,17 +33,39 @@ function insert(){
 	box1Value = document.getElementById("searchTrack").value;
 	var x = document.getElementById("mySelect").selectedIndex;
 	var playlistFromBox = document.getElementsByTagName("option")[x].value;
-	 $.ajax({
-		  type: 'GET',
-		  url: 'rest/playlist/insertingTrackToPlaylist?trackname='+box1Value+"&playlist="+ playlistFromBox,
-		  success:function(){
-			  alert(box1Value + " has been moved to the Playlist " + playlistFromBox);
-		  },
-		  contentType: 'application/json'
-	});
+	if(box1Value!="" && playlistFromBox!=""){
+		 $.ajax({
+			  type: 'GET',
+			  url: 'rest/playlist/insertingTrackToPlaylist?trackname='+box1Value+"&playlist="+ playlistFromBox,
+			  success:function(){
+				  alert(box1Value + " has been moved to the Playlist " + playlistFromBox);
+			  },
+			  contentType: 'application/json'
+		});
+	}else{
+		alert("Please choose both a Track and PlayList");
+	}
+	
 	
 }
 
+function removeMe(){
+	box1Value = document.getElementById("searchTrack").value;
+	var x = document.getElementById("mySelect").selectedIndex;
+	var playlistFromBox = document.getElementsByTagName("option")[x].value;
+	if(box1Value!="" && playlistFromBox!=""){
+		 $.ajax({
+			  type: 'GET',
+			  url: 'rest/playlist/removeTrackFromPlaylist?trackname='+box1Value+"&playlist="+ playlistFromBox,
+			  success:function(){
+				  alert(box1Value + " has been removed to the Playlist " + playlistFromBox);
+			  },
+			  contentType: 'application/json'
+		});
+	}else{
+		alert("Please choose both a Track and PlayList");
+	}
+}
 
 
 
@@ -73,7 +95,7 @@ $(function(){
 		                    //if ( text && ( !request.term || matcher.test(text) ) ) {
 		                        return {
 		                                label: v.name
-		                                
+		                               
 		                               };
 		                    //}
 		                }));

@@ -19,4 +19,5 @@ public interface IPlaylistDAO {
 	void saveEditPlaylist(int id, String name);
 	Collection<String>getNamesFromPlayListOnly();
 	void insertTrackIntoPlayList(String trackName, String playlistName);
+	void removeTrackFromPlaylist(String trackName, String playlistName);
 }

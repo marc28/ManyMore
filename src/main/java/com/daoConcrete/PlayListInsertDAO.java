@@ -85,7 +85,7 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 		//System.out.println("TRACK SIZE: " + tracks.size());
 		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.name LIKE :playlistName").setParameter("playlistName","%"+ playlistName +"%").getResultList();
 		//System.out.println("PLAYLIST IZE: " + playlist.size());
-		if(tracks!=null && playlist!=null){
+		if(tracks.size()>0 && playlist.size()>0){
 			PlayList p = playlist.get(0);//.add(tracks.get(0));
 			Track t = tracks.get(0);
 			p.getTracks().add(t);
@@ -93,6 +93,22 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 		}else{
 			System.out.println("NNNOOOOOPPPPEEEE");
 		}
+	}
+
+	@Override
+	public void removeTrackFromPlaylist(String trackName, String playlistName) {
+		List<Track> tracks = (List<Track>)em.createQuery("from Track t where t.name LIKE :trackName").setParameter("trackName", "%"+ trackName +"%").getResultList();
+		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.name LIKE :playlistName").setParameter("playlistName","%"+ playlistName +"%").getResultList();
+		if(tracks.size()>0 && playlist.size()>0){
+			
+			PlayList p = playlist.get(0);//.add(tracks.get(0));
+			Track t = tracks.get(0);
+			p.getTracks().remove(t);
+			em.merge(p);
+		}else{
+			System.out.println("Problem removing");
+		}
+		
 	}
 
 
