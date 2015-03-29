@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.daoInterface.ITrackDAO;
-import com.entities.PlayList;
 import com.entities.Track;
 
 @Local
@@ -70,5 +69,10 @@ public class TrackDAO implements ITrackDAO{
 		em.merge(track);
 		System.out.println("name has been changed!!");
 		
+	}
+
+	@Override
+	public Collection<Track> getTrackNamesOnly() {
+		return (Collection<Track>)em.createQuery("from Track t").getResultList();
 	}
 }

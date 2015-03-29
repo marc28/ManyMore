@@ -11,13 +11,18 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.entities.PlayList;
+import com.entities.Track;
 import com.serviceInterface.IPlaylistService;
+import com.serviceInterface.ITrackService;
 
 @Path("/playlist")
 public class playlistREST {
 
 	@EJB
 	private IPlaylistService service;
+	
+	@EJB
+	private ITrackService trackService;
 
 	@GET
 	@Path("/playlistnames")
@@ -25,6 +30,22 @@ public class playlistREST {
 	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
 	public Collection<PlayList> returnAllPlaylistsNames(){
 		return service.returnAllPlaylistsNames();
+	}
+	
+	@GET
+	@Path("/namesdropdown")
+	@Produces(MediaType.APPLICATION_JSON)
+	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
+	public Collection<String> getNamesFromPlayListOnly(){
+		return service.getNamesFromPlayListOnly();
+	}
+	
+	@GET
+	@Path("/tracknamesdropdown")
+	@Produces(MediaType.APPLICATION_JSON)
+	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
+	public Collection<Track> getTrackNamesOnly(){
+		return trackService.getTrackNamesOnly();
 	}
 
 	@GET

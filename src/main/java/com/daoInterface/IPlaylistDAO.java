@@ -17,4 +17,5 @@ public interface IPlaylistDAO {
 	Collection<PlayList> getAllPlayListsWithTracks();
 	void removePlaylist(int id);
 	void saveEditPlaylist(int id, String name);
+	Collection<String>getNamesFromPlayListOnly();
 }

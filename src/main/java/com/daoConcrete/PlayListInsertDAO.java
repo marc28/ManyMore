@@ -43,6 +43,14 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 				.setParameter("id", id).getResultList();*/
 		return (Collection<PlayList>)em.createQuery("from PlayList").getResultList();
 	}
+	
+
+	@Override
+	public Collection<String> getNamesFromPlayListOnly() {
+		// TODO Auto-generated method stub
+		return (Collection<String>)em.createQuery("select p.name from PlayList p").getResultList();
+	}
+	
 
 	
 	@SuppressWarnings("unchecked")
@@ -69,6 +77,7 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 		em.merge(playlist);
 		System.out.println("Playlist has been added");
 	}
+
 
 	
 

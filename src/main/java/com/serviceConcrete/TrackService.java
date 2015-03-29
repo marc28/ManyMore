@@ -61,4 +61,9 @@ public class TrackService implements ITrackService{
 		
 	}
 
+	@Override
+	public Collection<Track> getTrackNamesOnly() {
+		return dao.getTrackNamesOnly();
+	}
+
 }

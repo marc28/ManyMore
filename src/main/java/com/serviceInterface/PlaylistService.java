@@ -55,6 +55,11 @@ public class PlaylistService implements IPlaylistService{
 		
 	}
 
+	@Override
+	public Collection<String> getNamesFromPlayListOnly() {
+		return dao.getNamesFromPlayListOnly();
+	}
+
 	
 
 	

@@ -18,4 +18,5 @@ public interface IPlaylistService {
 	public Collection<PlayList> getAllPlayListsWithTracks();
 	public void removePlaylist(int id);
 	public void saveEditPlaylist(int id, String name);
+	Collection<String>getNamesFromPlayListOnly();
 }
