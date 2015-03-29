@@ -9,7 +9,7 @@ $('#addUserBut').click(function(){
 	
 	$.ajax({
 		type:'POST',
-	    url: "rest/user/addUser",
+	    url: "rest/files/import",
 	    contentType: "application/json",
 	    data:JSON.stringify({
             "email": $email,

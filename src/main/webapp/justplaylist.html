@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>PlayList Info</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">D14125304</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="viewtracks.html">Tracks <span
+							class="sr-only">(current)</span></a></li>
+					<li><a href="viewplaylists.html">PlayLists Tracks</a></li>
+					<li><a href="justplaylist.html">PlayLists</a></li>
+				</ul>
+				<div class="nav navbar-nav navbar-right">
+					<button id="logout" class="btn btn-default">Log Out</button>
+				</div>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<!-- <input type="text" id="playID">
+	<button id="showPlaylists">Go!!</button> -->
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<table id="table" class="table table-condensed">
+				<thead>
+					<th>ID</th>
+					<th>PLylist Name</th>
+				</thead>
+				<tbody id="playlistTableNoTracks">
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="js/playlistonly.js"></script>
+</body>
+</html>

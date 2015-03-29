@@ -13,8 +13,8 @@ import com.entities.User;
 
 @Local
 @Stateless
-public class UserDAO implements IUserDAO{
-	
+public class UserDAO implements IUserDAO {
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -23,7 +23,10 @@ public class UserDAO implements IUserDAO{
 		User user = new User();
 		user.setEmail(email);
 		user.setPassword(password);
-		em.persist(user);
+		Query q = em.createQuery("from User u where u.email = :email").setParameter("email", email);
+		List<User> userList = q.getResultList();
+		if (!userList.contains(user))
+			em.persist(user);
 	}
 
 	@Override
@@ -31,14 +34,14 @@ public class UserDAO implements IUserDAO{
 		Query query = em.createQuery("from User u where u.email = :email");
 		query.setParameter("email", email);
 		List<User> returnedUser = query.getResultList();
-		if(returnedUser.size() > 0 && validatePassword(returnedUser.get(0), password))
+		if (returnedUser.size() > 0
+				&& validatePassword(returnedUser.get(0), password))
 			return returnedUser.get(0);
 		return null;
 	}
-	
+
 	private boolean validatePassword(User user, String password) {
 		return user.getPassword().equals(password);
 	}
 
 }
-

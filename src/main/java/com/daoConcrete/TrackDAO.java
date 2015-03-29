@@ -40,7 +40,6 @@ public class TrackDAO implements ITrackDAO{
 	@Override
 	public void insertTrackInformation(Collection<Track> tracks) {
 		int count = 0;
-		System.out.println("£££££££££££££££££££££: " + tracks.size());
 		Query q = em.createQuery("from Track");
 		List<Track> trackList = q.getResultList();
 		for(Track t : tracks){
