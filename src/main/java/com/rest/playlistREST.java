@@ -33,6 +33,15 @@ public class playlistREST {
 	}
 	
 	@GET
+	@Path("/insertingTrackToPlaylist")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void insertTrackIntoPlayList(@QueryParam("trackname") String trackName, @QueryParam("playlist") String playlistName){
+		System.out.println("GAANNNNNJJJJJAAAAAA");
+		service.insertTrackIntoPlayList(trackName, playlistName);
+	}
+	
+	
+	@GET
 	@Path("/namesdropdown")
 	@Produces(MediaType.APPLICATION_JSON)
 	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {

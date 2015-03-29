@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import com.daoInterface.IPlaylistDAO;
 import com.entities.PlayList;
+import com.entities.Track;
 
 @Local
 @Stateless
@@ -76,6 +77,22 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 		playlist.setName(name);
 		em.merge(playlist);
 		System.out.println("Playlist has been added");
+	}
+
+	@Override
+	public void insertTrackIntoPlayList(String trackName, String playlistName) {
+		List<Track> tracks = (List<Track>)em.createQuery("from Track t where t.name LIKE :trackName").setParameter("trackName", "%"+ trackName +"%").getResultList();
+		//System.out.println("TRACK SIZE: " + tracks.size());
+		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.name LIKE :playlistName").setParameter("playlistName","%"+ playlistName +"%").getResultList();
+		//System.out.println("PLAYLIST IZE: " + playlist.size());
+		if(tracks!=null && playlist!=null){
+			PlayList p = playlist.get(0);//.add(tracks.get(0));
+			Track t = tracks.get(0);
+			p.getTracks().add(t);
+			em.merge(p);
+		}else{
+			System.out.println("NNNOOOOOPPPPEEEE");
+		}
 	}
 
 

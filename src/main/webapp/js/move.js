@@ -31,11 +31,34 @@ function handleResponseForDropDown(myData) {
 
 function insert(){
 	box1Value = document.getElementById("searchTrack").value;
-	//box2.value = document.getElementById('insertBtn').value;
 	var x = document.getElementById("mySelect").selectedIndex;
-	alert(document.getElementsByTagName("option")[x].value);
-	//alert(x);
+	var playlistFromBox = document.getElementsByTagName("option")[x].value;
+	 $.ajax({
+		  type: 'GET',
+		  url: 'rest/playlist/insertingTrackToPlaylist?trackname='+box1Value+"&playlist="+ playlistFromBox,
+		  success:function(){
+			  alert(box1Value + " has been moved to the Playlist " + playlistFromBox);
+		  },
+		  contentType: 'application/json'
+	});
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //'rest/playlist/tracknamesdropdown'
 $(function(){
 	  $("#searchTrack").autocomplete({

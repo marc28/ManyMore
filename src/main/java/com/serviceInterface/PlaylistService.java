@@ -60,6 +60,12 @@ public class PlaylistService implements IPlaylistService{
 		return dao.getNamesFromPlayListOnly();
 	}
 
+	@Override
+	public void insertTrackIntoPlayList(String trackName, String playlistName) {
+		dao.insertTrackIntoPlayList(trackName, playlistName);
+		
+	}
+
 	
 
 	
