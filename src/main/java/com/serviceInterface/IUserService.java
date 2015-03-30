@@ -13,5 +13,5 @@ public interface IUserService {
 
 	void addUser(String email, String password);
 	User checkUserDetails(String email, String password);
-	User getUserById(int id);
+	public User getUserEmail(String email);
 }

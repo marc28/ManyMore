@@ -45,8 +45,10 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public User getUserById(int id) {
-		User u = em.find(User.class, id);
+	public User getUserEmail(String email) {
+		Query q = em.createQuery("from User u where u.email = :email").setParameter("email", email);
+		User userRetruned = (User) q.getSingleResult();
+		User u = em.find(User.class, userRetruned.getLibraryid());
 		return u;
 	}
 

@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
@@ -94,14 +95,15 @@ public class UploadImportREST {
 	
 	@POST
 	@Path("/import")
-	public void importXML(){
-		ReadInXML rin = new ReadInXML("C:/Users/marc/Documents/tracks.xml");
-		User u = userService.getUserById(1);
+	public void importXML(@QueryParam("useremail") String email){
+		System.out.println("EMAIL::::::::::::::: " + email);
+		User u = userService.getUserEmail(email);
 		Library l = new Library();
-		l.setLibID(1);
+		l.setLibID(u.getLibraryid());
 		l.setUser(u);
 		libService.insertLibrary(l);
 		//Put in the tracks
+		ReadInXML rin = new ReadInXML("C:/Users/marc/Documents/tracks.xml",l.getLibID());
 		Collection<Track> tracks = rin.getAllTrackInoframtion();
 		service.insertTrackInformation(tracks);
 		//Put in the play lists

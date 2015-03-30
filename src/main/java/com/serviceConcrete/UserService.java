@@ -26,8 +26,8 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public User getUserById(int id) {
-		return dao.getUserById(id);
+	public User getUserEmail(String email) {
+		return dao.getUserEmail(email);
 	}
 
 }

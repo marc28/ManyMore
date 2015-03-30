@@ -11,5 +11,5 @@ public interface IUserDAO {
 
 	User checkUserDetails(String email, String password);
 	
-	User getUserById(int id);
+	User getUserEmail(String email);
 }

@@ -19,17 +19,19 @@ public class ReadInXML {
 
 	SAXBuilder builder;
 	File xmlFile;
+	int lidId;
 
-	public ReadInXML(String fileName) {
+	public ReadInXML(String fileName, int libId) {
 		builder = new SAXBuilder();
 		xmlFile = new File(fileName);
+		this.lidId = libId;
 	}
 
 	public ArrayList<Track> getAllTrackInoframtion() {
 		Document document;
 		Track track = new Track();
 		Library lib = new Library();
-		lib.setLibID(1);
+		lib.setLibID(lidId);
 		ArrayList<Track> tracks = new ArrayList<Track>();
 		try {
 			document = (Document) builder.build(xmlFile);
@@ -81,7 +83,7 @@ public class ReadInXML {
 		PlayList playlist = new PlayList();
 		Document document;
 		Library user = new Library();
-		user.setLibID(1);
+		user.setLibID(lidId);
 	
 
 		try {
