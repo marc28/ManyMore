@@ -11,7 +11,7 @@ import com.entities.User;
 @WebService
 public interface IUserService {
 
-	public void addUser(String email, String password);
-
-	public User checkUserDetails(String email, String password);
+	void addUser(String email, String password);
+	User checkUserDetails(String email, String password);
+	User getUserById(int id);
 }

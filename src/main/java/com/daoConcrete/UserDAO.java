@@ -44,4 +44,10 @@ public class UserDAO implements IUserDAO {
 		return user.getPassword().equals(password);
 	}
 
+	@Override
+	public User getUserById(int id) {
+		User u = em.find(User.class, id);
+		return u;
+	}
+
 }

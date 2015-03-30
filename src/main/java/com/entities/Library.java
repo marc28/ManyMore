@@ -18,11 +18,11 @@ import javax.persistence.OneToOne;
 public class Library {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int libID;
 
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="userId")
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="userId",nullable=false)
 	private User user; //Join user one to one
 	
 	@OneToMany(mappedBy="userTrack",fetch = FetchType.LAZY,cascade = CascadeType.ALL)

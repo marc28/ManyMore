@@ -25,4 +25,9 @@ public class UserService implements IUserService{
 		return dao.checkUserDetails(email,password);
 	}
 
+	@Override
+	public User getUserById(int id) {
+		return dao.getUserById(id);
+	}
+
 }

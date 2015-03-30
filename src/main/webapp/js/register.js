@@ -9,7 +9,7 @@ $('#addUserBut').click(function(){
 	
 	$.ajax({
 		type:'POST',
-	    url: "rest/files/import",
+	    url: "rest/user/addUser",
 	    contentType: "application/json",
 	    data:JSON.stringify({
             "email": $email,
@@ -22,7 +22,7 @@ $('#addUserBut').click(function(){
 	    success: function() {
 	    	alert("User Added");
 	    	clearAll();
-	    	window.location.href="login.html";
+	    	window.location.href="insert.html";
 	    }
 	});
 });

@@ -18,9 +18,9 @@ public class User {
 	private String email;
 	private String password;
 	
-	@OneToOne(fetch=FetchType.LAZY,mappedBy="user")
+/*	@OneToOne(fetch=FetchType.LAZY,mappedBy="user")
 	private Library library; //join user To Library
-	
+*/	
 	
 
 	public int getLibraryid() {
