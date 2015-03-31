@@ -53,12 +53,13 @@ function saveme(me){
 	var name = tdnameNode.innerHTML; //playlist name value
 	tdnameNode.setAttribute("contentEditable", false);
 	var playlistid = me.parentNode.parentNode.cells[0].textContent;
+	var playListNameALerted = me.parentNode.parentNode.cells[1].textContent;
 	
 	$.ajax({
 		  type: 'GET',
 		  url: 'rest/playlist/editandsave?pid='+ playlistid+"&name=" + name,
 		  success:function(){
-			  alert(playlistid + " has been changed");
+			  alert(playListNameALerted + " has been changed");
 			  location.reload();
 		  },
 		  contentType: 'application/json'
@@ -67,11 +68,12 @@ function saveme(me){
 
 function deletMe(el) {
 	   var playlistid = el.parentNode.parentNode.cells[0].textContent;
+	   var playListNameALerted = el.parentNode.parentNode.cells[1].textContent;
 	  $.ajax({
 			  type: 'GET',
 			  url: 'rest/playlist/pid?pid='+ playlistid,
 			  success:function(){
-				  alert(playlistid + " has been deleted");
+				  alert(playListNameALerted + " has been deleted");
 				  location.reload();
 			  },
 			  contentType: 'application/json'

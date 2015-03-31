@@ -16,8 +16,8 @@ public class UserService implements IUserService{
 	private IUserDAO dao;
 	
 	@Override
-	public void addUser(String email, String password) {
-		dao.addUser(email, password);
+	public User addUser(String email, String password) {
+		return dao.addUser(email, password);
 	}
 
 	@Override

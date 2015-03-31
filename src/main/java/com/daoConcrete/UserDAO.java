@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -19,14 +20,23 @@ public class UserDAO implements IUserDAO {
 	private EntityManager em;
 
 	@Override
-	public void addUser(String email, String password) {
+	public User addUser(String email, String password) {
 		User user = new User();
 		user.setEmail(email);
 		user.setPassword(password);
 		Query q = em.createQuery("from User u where u.email = :email").setParameter("email", email);
 		List<User> userList = q.getResultList();
-		if (!userList.contains(user))
+		boolean same = false;
+		for(User i : userList){
+			if(i.getEmail().equals(user.getEmail())){
+				same = true;
+			}
+		}
+		if(!same){
 			em.persist(user);
+			return user;
+		}	
+		return null;
 	}
 
 	@Override
@@ -34,8 +44,7 @@ public class UserDAO implements IUserDAO {
 		Query query = em.createQuery("from User u where u.email = :email");
 		query.setParameter("email", email);
 		List<User> returnedUser = query.getResultList();
-		if (returnedUser.size() > 0
-				&& validatePassword(returnedUser.get(0), password))
+		if (returnedUser.size() > 0	&& validatePassword(returnedUser.get(0), password))
 			return returnedUser.get(0);
 		return null;
 	}
@@ -44,12 +53,21 @@ public class UserDAO implements IUserDAO {
 		return user.getPassword().equals(password);
 	}
 
+	
 	@Override
 	public User getUserEmail(String email) {
 		Query q = em.createQuery("from User u where u.email = :email").setParameter("email", email);
-		User userRetruned = (User) q.getSingleResult();
-		User u = em.find(User.class, userRetruned.getLibraryid());
-		return u;
+		User userRetruned = null;
+		try {
+			userRetruned = (User) q.getSingleResult();
+		} catch (NoResultException nre) {
+			//Nothing to handle really!!
+		}
+		if (userRetruned != null) {
+			User u = em.find(User.class, userRetruned.getLibraryid());
+			return u;
+		}
+		return userRetruned;
 	}
 
 }

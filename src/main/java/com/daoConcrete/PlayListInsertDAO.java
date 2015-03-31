@@ -55,7 +55,7 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<PlayList> getAllPlayListsWithTracks(int id) {
-		return (Collection<PlayList>) em.createQuery("select p.name, p.playlistId, t.name,t.album, t.artist"
+		return (Collection<PlayList>) em.createQuery("select p.name, t.name,t.album, t.artist"
 				+ " FROM PlayList p "
 				+ " inner join p.tracks t WHERE p.userPlayList.libID = :id ORDER BY p.playlistId"
 				).setParameter("id", id).getResultList();

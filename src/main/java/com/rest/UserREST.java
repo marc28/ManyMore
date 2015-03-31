@@ -19,9 +19,9 @@ public class UserREST {
 	@POST
 	@Path("/addUser")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addUser(User user){
+	public User addUser(User user){
 		//User user = new User(email, password,position);
-		service.addUser(user.getEmail(),user.getPassword());
+		return service.addUser(user.getEmail(),user.getPassword());
 	}
 	
 	@POST

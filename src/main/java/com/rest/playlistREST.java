@@ -1,5 +1,6 @@
 package com.rest;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -22,77 +23,105 @@ public class playlistREST {
 
 	@EJB
 	private IPlaylistService service;
-	
+
 	@EJB
 	private ITrackService trackService;
-	
+
 	@EJB
 	private IUserService userService;
-	
-	
 
 	@GET
 	@Path("/playlistnames")
 	@Produces(MediaType.APPLICATION_JSON)
-	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
-	public Collection<PlayList> returnAllPlaylistsNames(@QueryParam("libid") String userEmail){
-		User u = userService.getUserEmail(userEmail);
-		return service.returnAllPlaylistsNames(u.getLibraryid());
+	// public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
+	public Collection<PlayList> returnAllPlaylistsNames(
+			@QueryParam("libid") String userEmail) {
+		if (userEmail != null) {
+			User u = userService.getUserEmail(userEmail);
+			if (u != null) {
+				return service.returnAllPlaylistsNames(u.getLibraryid());
+			}
+		}
+		Collection<PlayList> nothingFound = new ArrayList<PlayList>();
+		return nothingFound; // return an empty list
 	}
-	
+
 	@GET
 	@Path("/insertingTrackToPlaylist")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void insertTrackIntoPlayList(@QueryParam("trackname") String trackName, @QueryParam("playlist") String playlistName){
+	public void insertTrackIntoPlayList(
+			@QueryParam("trackname") String trackName,
+			@QueryParam("playlist") String playlistName) {
 		System.out.println("GAANNNNNJJJJJAAAAAA");
 		service.insertTrackIntoPlayList(trackName, playlistName);
 	}
-	
+
 	@GET
 	@Path("/removeTrackFromPlaylist")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void removeTrackFromPlaylist(@QueryParam("trackname") String trackName, @QueryParam("playlist") String playlistName){
-		
+	public void removeTrackFromPlaylist(@QueryParam("trackname") String trackName,
+			@QueryParam("playlist") String playlistName) {
+
 		service.removeTrackFromPlaylist(trackName, playlistName);
 	}
-	
-	
+
 	@GET
 	@Path("/namesdropdown")
 	@Produces(MediaType.APPLICATION_JSON)
-	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
-	public Collection<String> getNamesFromPlayListOnly(@QueryParam("libid") String userEmail){
-		User u = userService.getUserEmail(userEmail);
-		return service.getNamesFromPlayListOnly(u.getLibraryid());
+	// public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
+	public Collection<String> getNamesFromPlayListOnly(
+			@QueryParam("libid") String userEmail) {
+		if (userEmail != null) {
+			User u = userService.getUserEmail(userEmail);
+			if (u != null) {
+				return service.getNamesFromPlayListOnly(u.getLibraryid());
+			}
+		}
+		Collection<String> nothingFound = new ArrayList<String>();
+		return nothingFound; // return an empty list
 	}
-	
+
 	@GET
 	@Path("/tracknamesdropdown")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Track> getTrackNamesOnly(@QueryParam("libid") String userEmail){
-		System.out.println("*****************************************" + userEmail + "********************************8");
-		User u = userService.getUserEmail(userEmail);
-		return trackService.getTrackNamesOnly(u.getLibraryid());
+	public Collection<Track> getTrackNamesOnly(
+			@QueryParam("libid") String userEmail) {
+		if (userEmail != null) {
+			User u = userService.getUserEmail(userEmail);
+			if (u != null) {
+				return trackService.getTrackNamesOnly(u.getLibraryid());
+			}
+		}
+		Collection<Track> nothingFound = new ArrayList<Track>();
+		return nothingFound; // return an empty list
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<PlayList> getAllPlayListsWithTracks(@QueryParam("libid") String userEmail){
-		User u = userService.getUserEmail(userEmail);
-		return service.getAllPlayListsWithTracks(u.getLibraryid());
+	public Collection<PlayList> getAllPlayListsWithTracks(
+			@QueryParam("libid") String userEmail) {
+		if (userEmail != null) {
+			User u = userService.getUserEmail(userEmail);
+			if (u != null) {
+				return service.getAllPlayListsWithTracks(u.getLibraryid());
+			}
+		}
+		Collection<PlayList> nothingFound = new ArrayList<PlayList>();
+		return nothingFound; // return an empty list
 	}
-	
+
 	@GET
 	@Path("/pid")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void removePlaylist(@QueryParam("pid") int id){
+	public void removePlaylist(@QueryParam("pid") int id) {
 		service.removePlaylist(id);
 	}
-	
+
 	@GET
 	@Path("/editandsave")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void saveEditPlaylist(@QueryParam("pid") int id,@QueryParam("name") String name){
-		service.saveEditPlaylist(id,name);
+	public void saveEditPlaylist(@QueryParam("pid") int id,
+			@QueryParam("name") String name) {
+		service.saveEditPlaylist(id, name);
 	}
 }
