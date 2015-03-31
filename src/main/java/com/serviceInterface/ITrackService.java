@@ -18,5 +18,5 @@ public interface ITrackService {
 	public void insertTrackInformation(Collection<Track> tracks);
 	public void removeTrack(int id);
 	public void saveEditTrack(int id,String name,String artist,String album);
-	Collection<Track>getTrackNamesOnly(int id);
+	Collection<Track>getTrackNamesOnly(int id, String title);
 }

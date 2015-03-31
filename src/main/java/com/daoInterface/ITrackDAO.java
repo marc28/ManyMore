@@ -21,5 +21,5 @@ public interface ITrackDAO {
 
 	public void saveEditTrack(int id,String name,String artist,String album);
 	
-	Collection<Track>getTrackNamesOnly(int id);
+	Collection<Track>getTrackNamesOnly(int id,String title);
 }

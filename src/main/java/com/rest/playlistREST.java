@@ -85,11 +85,12 @@ public class playlistREST {
 	@Path("/tracknamesdropdown")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Track> getTrackNamesOnly(
-			@QueryParam("libid") String userEmail) {
+			@QueryParam("libid") String userEmail,
+			@QueryParam("title") String title) {
 		if (userEmail != null) {
 			User u = userService.getUserEmail(userEmail);
 			if (u != null) {
-				return trackService.getTrackNamesOnly(u.getLibraryid());
+				return trackService.getTrackNamesOnly(u.getLibraryid(),title);
 			}
 		}
 		Collection<Track> nothingFound = new ArrayList<Track>();

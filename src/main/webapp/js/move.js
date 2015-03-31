@@ -106,11 +106,13 @@ $(function(){
 	  $("#searchTrack").autocomplete({
 		  source: function (request, response) {
 		       // var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+			  var title = document.getElementById('searchTrack').value;
 		        $.ajax({
-		            url: "rest/playlist/tracknamesdropdown?libid="+userEmail,
+		            url: "rest/playlist/tracknamesdropdown?libid="+userEmail+"&title="+title,
 		            dataType: "json",
 		            success: function (data) {
-		                response($.map(data, function(v,i){
+		            	//alert(data[0].name);
+		               response($.map(data, function(v,i){
 		                  //  var text = v.name;
 		                    //if ( text && ( !request.term || matcher.test(text) ) ) {
 		                        return {
@@ -119,7 +121,8 @@ $(function(){
 		                               };
 		                    //}
 		                }));
-		            }
+		            	//response(data);
+		            } //end of success
 		        });
 		    }
 	});

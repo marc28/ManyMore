@@ -73,7 +73,18 @@ public class TrackDAO implements ITrackDAO{
 	}
 
 	@Override
-	public Collection<Track> getTrackNamesOnly(int id) {
-		return (Collection<Track>)em.createQuery("from Track t where t.userTrack.libID = :id").setParameter("id", id).getResultList();
+	public Collection<Track> getTrackNamesOnly(int id, String title) {
+		return (Collection<Track>)em.createQuery("from Track t where t.name LIKE '%"+ title +"%' AND t.userTrack.libID = :id").setParameter("id", id).getResultList();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
