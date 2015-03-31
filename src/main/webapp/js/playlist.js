@@ -6,10 +6,20 @@ $(document).ready(function(){
 });
 
 function getAllPlayListTrackInfo() {
+	var userEmail = "";
+	var cookies = document.cookie; // gets the cookie
+	var cookieArray = cookies.split(';');
+	for (var i = 0; i < cookieArray.length; i++) {
+		var key = cookieArray[i].split('=')[0];
+		key = key.trim();
+		var value = cookieArray[i].split('=')[1];
+		var valuesArray = value.split("---");
+		userEmail = decodeURI(valuesArray[0]);
+	}
 
 	$.ajax({
 		type : 'GET',
-		url : 'rest/playlist',
+		url : 'rest/playlist?libid='+userEmail,
 		success : handleResponseJQuery3,
 		contentType : 'application/json'
 	});

@@ -7,10 +7,20 @@ $(document).ready(function() {
 });
 
 function getAllPlayListNames() {
+	var userEmail = "";
+	var cookies = document.cookie; // gets the cookie
+	var cookieArray = cookies.split(';');
+	for (var i = 0; i < cookieArray.length; i++) {
+		var key = cookieArray[i].split('=')[0];
+		key = key.trim();
+		var value = cookieArray[i].split('=')[1];
+		var valuesArray = value.split("---");
+		userEmail = decodeURI(valuesArray[0]);
+	}
 
 	$.ajax({
 		type : 'GET',
-		url : 'rest/playlist/namesdropdown',
+		url : 'rest/playlist/namesdropdown?libid='+userEmail,
 		success : handleResponseForDropDown,
 		contentType : 'application/json'
 	});
@@ -83,11 +93,21 @@ function removeMe(){
 
 //'rest/playlist/tracknamesdropdown'
 $(function(){
+	var userEmail = "";
+	var cookies = document.cookie; // gets the cookie
+	var cookieArray = cookies.split(';');
+	for (var i = 0; i < cookieArray.length; i++) {
+		var key = cookieArray[i].split('=')[0];
+		key = key.trim();
+		var value = cookieArray[i].split('=')[1];
+		var valuesArray = value.split("---");
+		userEmail = decodeURI(valuesArray[0]);
+	}
 	  $("#searchTrack").autocomplete({
 		  source: function (request, response) {
 		       // var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
 		        $.ajax({
-		            url: "rest/playlist/tracknamesdropdown",
+		            url: "rest/playlist/tracknamesdropdown?libid="+userEmail,
 		            dataType: "json",
 		            success: function (data) {
 		                response($.map(data, function(v,i){

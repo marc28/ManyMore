@@ -12,8 +12,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.entities.PlayList;
 import com.entities.Track;
+import com.entities.User;
 import com.serviceInterface.IPlaylistService;
 import com.serviceInterface.ITrackService;
+import com.serviceInterface.IUserService;
 
 @Path("/playlist")
 public class playlistREST {
@@ -23,13 +25,19 @@ public class playlistREST {
 	
 	@EJB
 	private ITrackService trackService;
+	
+	@EJB
+	private IUserService userService;
+	
+	
 
 	@GET
 	@Path("/playlistnames")
 	@Produces(MediaType.APPLICATION_JSON)
 	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
-	public Collection<PlayList> returnAllPlaylistsNames(){
-		return service.returnAllPlaylistsNames();
+	public Collection<PlayList> returnAllPlaylistsNames(@QueryParam("libid") String userEmail){
+		User u = userService.getUserEmail(userEmail);
+		return service.returnAllPlaylistsNames(u.getLibraryid());
 	}
 	
 	@GET
@@ -53,22 +61,25 @@ public class playlistREST {
 	@Path("/namesdropdown")
 	@Produces(MediaType.APPLICATION_JSON)
 	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
-	public Collection<String> getNamesFromPlayListOnly(){
-		return service.getNamesFromPlayListOnly();
+	public Collection<String> getNamesFromPlayListOnly(@QueryParam("libid") String userEmail){
+		User u = userService.getUserEmail(userEmail);
+		return service.getNamesFromPlayListOnly(u.getLibraryid());
 	}
 	
 	@GET
 	@Path("/tracknamesdropdown")
 	@Produces(MediaType.APPLICATION_JSON)
-	//public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
-	public Collection<Track> getTrackNamesOnly(){
-		return trackService.getTrackNamesOnly();
+	public Collection<Track> getTrackNamesOnly(@QueryParam("libid") String userEmail){
+		System.out.println("*****************************************" + userEmail + "********************************8");
+		User u = userService.getUserEmail(userEmail);
+		return trackService.getTrackNamesOnly(u.getLibraryid());
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<PlayList> getAllPlayListsWithTracks(){
-		return service.getAllPlayListsWithTracks();
+	public Collection<PlayList> getAllPlayListsWithTracks(@QueryParam("libid") String userEmail){
+		User u = userService.getUserEmail(userEmail);
+		return service.getAllPlayListsWithTracks(u.getLibraryid());
 	}
 	
 	@GET

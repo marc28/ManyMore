@@ -13,7 +13,7 @@ public interface ITrackDAO {
 	
 	public void addTrackToDataBase(Track track);
 
-	public Collection<Track> getAllTracks();
+	public Collection<Track> getAllTracks(int id);
 
 	public void insertTrackInformation(Collection<Track> tracks);
 	
@@ -21,5 +21,5 @@ public interface ITrackDAO {
 
 	public void saveEditTrack(int id,String name,String artist,String album);
 	
-	Collection<Track>getTrackNamesOnly();
+	Collection<Track>getTrackNamesOnly(int id);
 }

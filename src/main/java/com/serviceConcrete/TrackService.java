@@ -28,9 +28,9 @@ public class TrackService implements ITrackService{
 	}
 	
 	@Override
-	public Collection<Track> getAllTracks() {
+	public Collection<Track> getAllTracks(int id) {
 		// TODO Auto-generated method stub
-		return dao.getAllTracks();
+		return dao.getAllTracks(id);
 	}
 
 	public ITrackDAO getDao() {
@@ -62,8 +62,8 @@ public class TrackService implements ITrackService{
 	}
 
 	@Override
-	public Collection<Track> getTrackNamesOnly() {
-		return dao.getTrackNamesOnly();
+	public Collection<Track> getTrackNamesOnly(int id) {
+		return dao.getTrackNamesOnly(id);
 	}
 
 }

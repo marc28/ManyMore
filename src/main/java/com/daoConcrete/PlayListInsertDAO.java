@@ -38,29 +38,27 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<PlayList> returnAllPlaylistsNames() {
-		/*return (Collection<PlayList>) em
-				.createQuery("from PlayList p where p.id = :id")
-				.setParameter("id", id).getResultList();*/
-		return (Collection<PlayList>)em.createQuery("from PlayList").getResultList();
+	public Collection<PlayList> returnAllPlaylistsNames(int id) {
+	
+		return (Collection<PlayList>)em.createQuery("from PlayList p where p.userPlayList.libID = :id").setParameter("id", id).getResultList();
 	}
 	
 
 	@Override
-	public Collection<String> getNamesFromPlayListOnly() {
+	public Collection<String> getNamesFromPlayListOnly(int id) {
 		// TODO Auto-generated method stub
-		return (Collection<String>)em.createQuery("select p.name from PlayList p").getResultList();
+		return (Collection<String>)em.createQuery("select p.name from PlayList p where p.userPlayList.libID = :id").setParameter("id", id).getResultList();
 	}
 	
 
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<PlayList> getAllPlayListsWithTracks() {
+	public Collection<PlayList> getAllPlayListsWithTracks(int id) {
 		return (Collection<PlayList>) em.createQuery("select p.name, p.playlistId, t.name,t.album, t.artist"
 				+ " FROM PlayList p "
-				+ " inner join p.tracks t ORDER BY p.playlistId"
-				).getResultList();
+				+ " inner join p.tracks t WHERE p.userPlayList.libID = :id ORDER BY p.playlistId"
+				).setParameter("id", id).getResultList();
 	}
 
 	@Override

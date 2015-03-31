@@ -1,7 +1,9 @@
 /**
  * 
  */
-
+/****************************
+ * REGISTER
+ */
 $('#addUserBut').click(function() {
 	var $email = $('#email').val();
 	var $password = $('#pwd').val();
@@ -26,6 +28,27 @@ $('#addUserBut').click(function() {
 	});
 });
 
+//Create the cookie
+function createCookieReg(expiry) {
+
+	var d = new Date();
+	d.setTime(d.getTime() + (expiry * 24 * 60 * 60 * 1000));
+	var expires = "expires=" + d.toUTCString();
+	var userEmail = document.getElementById("email").value;
+	var password = document.getElementById("pwd").value;
+
+	var seperator = "---"; // neede to break up the string array
+	var valuePairString = userEmail + seperator + password + ";" + expires
+			+ ";";
+	valuePairString = encodeURI(valuePairString);
+	// cookie should be eg: {marc=1---2---3---4---5}
+	document.cookie = "" + userEmail + "=" + valuePairString + ";";
+	//alert("Thanks for registering: " + getCookieLogin());
+
+}
+/**************************
+ * LOGIN
+ */
 $('#loginBtn').click(function() {
 	var email = $('#emailLogin').val();
 	var password = $('#pwdLogin').val();
@@ -42,12 +65,15 @@ $('#loginBtn').click(function() {
 			clearAll();
 		},
 		success : function(data) {
+			alert("DATA:  " + data[0]);
 			if (data == null) {
 				alert("Problem");
 				clearAll();
 			} else {
+				getCookieLogin();
 				alert("Logged In");
-				window.location.href = "viewtracks.html";
+				a = encodeURIComponent(email);
+				window.location.href = "viewtracks.html?email="+a;
 			}
 		}
 	});
@@ -58,24 +84,7 @@ function clearAll() {
 	$('#pwdLogin').val('');
 }
 
-// This is called when you click the registration button
-function createCookieReg(expiry) {
 
-	var d = new Date();
-	d.setTime(d.getTime() + (expiry * 24 * 60 * 60 * 1000));
-	var expires = "expires=" + d.toUTCString();
-	var userEmail = document.getElementById("email").value;
-	var password = document.getElementById("pwd").value;
-
-	var seperator = "---"; // neede to break up the string array
-	var valuePairString = userEmail + seperator + password + ";" + expires
-			+ ";";
-	valuePairString = encodeURI(valuePairString);
-	// cookie should be eg: {marc=1---2---3---4---5}
-	document.cookie = "" + userEmail + "=" + valuePairString + ";";
-	alert("Thanks for registering: " + getCookieLogin());
-
-}
 
 // Getting the cookie for login
 function getCookieLogin() {
@@ -88,14 +97,16 @@ function getCookieLogin() {
 			for (var i = 0; i < cookieArray.length; i++) {
 				var key = cookieArray[i].split('=')[0];
 				key = key.trim();
-				var value = cookieArray[i].split('=')[1];
-				var valuesArray = value.split("---");
-				var userEmail = decodeURI(valuesArray[0]);
-				return userEmail;
+				if(key == user){
+					var value = cookieArray[i].split('=')[1];
+					var valuesArray = value.split("---");
+					var userEmail = decodeURI(valuesArray[0]);
+					return userEmail;
+				}
 			}
 
 		} else {
-			alert("Sorry, not registered");
+			//alert("Sorry, not registered");
 		}
 
 	} else {

@@ -12,17 +12,24 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.entities.Track;
+import com.entities.User;
 import com.serviceInterface.ITrackService;
+import com.serviceInterface.IUserService;
 
 @Path("/tracks")
 public class TrackREST {
 	@EJB
 	private ITrackService service;
 	
+	@EJB
+	private IUserService userService;
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Track> hello(){
-		return service.getAllTracks();
+	public Collection<Track> hello(@QueryParam("libid") String userEmail){
+		System.out.println("user email: " + userEmail);
+		User u = userService.getUserEmail(userEmail);
+		return service.getAllTracks(u.getLibraryid());
 	}
 	
 	@GET

@@ -31,8 +31,8 @@ public class TrackDAO implements ITrackDAO{
 	}
 	
 	@Override
-	public Collection<Track> getAllTracks() {
-		Query query = em.createQuery("from Track");
+	public Collection<Track> getAllTracks(int id) {
+		Query query = em.createQuery("from Track t where t.userTrack.libID = :id").setParameter("id", id);
 		return query.getResultList();
 	}
 
@@ -61,6 +61,7 @@ public class TrackDAO implements ITrackDAO{
 
 	@Override
 	public void saveEditTrack(int id,String name,String artist,String album) {
+		
 		Track track = (Track) em.createQuery("from Track t where t.id = :id").setParameter("id",id).getSingleResult();
 		track.setName(name);
 		track.setArtist(artist);
@@ -72,7 +73,7 @@ public class TrackDAO implements ITrackDAO{
 	}
 
 	@Override
-	public Collection<Track> getTrackNamesOnly() {
-		return (Collection<Track>)em.createQuery("from Track t").getResultList();
+	public Collection<Track> getTrackNamesOnly(int id) {
+		return (Collection<Track>)em.createQuery("from Track t where t.userTrack.libID = :id").setParameter("id", id).getResultList();
 	}
 }

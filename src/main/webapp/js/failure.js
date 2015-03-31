@@ -9,9 +9,22 @@ $( document ).ready(function() {
 
 
 function getAllFailures() {
+	var prodId = getParameterByName('email');
+	if(prodId==""){
+		var cookies = document.cookie; // gets the cookie
+		var cookieArray = cookies.split(';');
+		for (var i = 0; i < cookieArray.length; i++) {
+			var key = cookieArray[i].split('=')[0];
+			key = key.trim();
+			var value = cookieArray[i].split('=')[1];
+			var valuesArray = value.split("---");
+			prodId = decodeURI(valuesArray[0]);
+		}
+	}
+	
 	$.ajax({
 		type : 'GET',
-		url : 'rest/tracks/',
+		url : 'rest/tracks?libid='+prodId,
 		success : handleResponseJQuery,
 		contentType : 'application/json'
 	});
@@ -86,5 +99,12 @@ function deletMe(el) {
 			  contentType: 'application/json'
 		});
 	}
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 

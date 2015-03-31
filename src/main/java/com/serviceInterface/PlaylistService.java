@@ -25,8 +25,8 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public Collection<PlayList> returnAllPlaylistsNames() {
-		return dao.returnAllPlaylistsNames();
+	public Collection<PlayList> returnAllPlaylistsNames(int id) {
+		return dao.returnAllPlaylistsNames(id);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public Collection<PlayList> getAllPlayListsWithTracks() {
-		return dao.getAllPlayListsWithTracks();
+	public Collection<PlayList> getAllPlayListsWithTracks(int id) {
+		return dao.getAllPlayListsWithTracks(id);
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public Collection<String> getNamesFromPlayListOnly() {
-		return dao.getNamesFromPlayListOnly();
+	public Collection<String> getNamesFromPlayListOnly(int id) {
+		return dao.getNamesFromPlayListOnly(id);
 	}
 
 	@Override
