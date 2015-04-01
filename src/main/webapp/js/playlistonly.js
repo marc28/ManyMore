@@ -56,6 +56,7 @@ function saveme(me){
 	var parent = me.parentNode.parentNode;
 	var tdnameNode = parent.children[1]; //get the playlist name node
 	var name = tdnameNode.innerHTML; //playlist name value
+	name=name.substring(0,name.length-4);
 	tdnameNode.setAttribute("contentEditable", false);
 	var playlistid = me.parentNode.parentNode.cells[0].textContent;
 	var playListNameALerted = me.parentNode.parentNode.cells[1].textContent;

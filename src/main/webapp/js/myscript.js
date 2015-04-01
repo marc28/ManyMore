@@ -180,6 +180,7 @@ function saveme(me) {
 	var parent = me.parentNode.parentNode;
 	var tdnameNode = parent.children[1]; // get the user name node
 	var name = tdnameNode.innerHTML; // name value
+	name=name.substring(0,name.length-4);
 	var tdArtistNode = parent.children[2];
 	var artist = tdArtistNode.innerHTML; // artist value
 	var tdAlbumNode = parent.children[3];
