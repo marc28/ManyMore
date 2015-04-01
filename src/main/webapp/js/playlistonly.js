@@ -27,17 +27,22 @@ function getTrackListInfo() {
 
 function getBackPlaylistInfo(myData) {
 
-	for (var i = 0; i < myData.length; i++) {
+	/*for (var i = 0; i < myData.length; i++) {
 
 		$('#playlistTableNoTracks').append(
 				"<tr>" + "<td>" + myData[i].playlistId + "</td>" 
-						+ "<td>"+ myData[i].name + "</td>" + "<td>"
+						+ "<td>"+ myData[i].name + "</td>"
 						+ "<td><button onclick='edit(this)'class='btn btn-warning'>Edit</button></td>"
 						+ "<td><button onclick='saveme(this)'class='btn btn-success'>Save</button></td>"
 						+ "<td><button onclick='deletMe(this)' class='btn btn-danger'>Delete</button></td>"
 						+ "</tr>");
 	}
-	;
+	;*/
+	var t = $('#table').DataTable();
+	var i;
+	for(i =0;i<myData.length;i++){
+		t.row.add([ myData[i].playlistId, myData[i].name,"<button onclick='edit(this)'class='btn btn-warning'>Edit</button>","<button onclick='saveme(this)'class='btn btn-success'>Save</button>","<button onclick='deletMe(this)' class='btn btn-danger'>Delete</button>"]).draw();
+	}
 }
 
 function edit(me){

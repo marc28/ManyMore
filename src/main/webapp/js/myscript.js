@@ -114,6 +114,7 @@ function getCookieLogin() {
 
 $(document).ready(function() {
 	getAllFailures();
+	    //$('#table').DataTable();
 });
 
 function getAllFailures() {
@@ -142,7 +143,7 @@ function getAllFailures() {
 
 function handleResponseJQuery(myData) {
 
-	for (var i = 0; i < myData.length; i++) {
+	/*for (var i = 0; i < myData.length; i++) {
 
 		$('#table-body')
 				.append("<tr>"
@@ -156,8 +157,13 @@ function handleResponseJQuery(myData) {
 								+ "<td><button onclick='saveme(this)'class='btn btn-success'>Save</button></td>"
 								+ "<td><button onclick='deletMe(this)' class='btn btn-danger'>Delete</button></td>"
 								+ "</tr>");
+	}*/
+	
+	var t = $('#table').DataTable();
+	var i;
+	for(i =0;i<myData.length;i++){
+		t.row.add([ myData[i].trackID, myData[i].name,myData[i].artist,myData[i].album,myData[i].year,"<button onclick='edit(this)'class='btn btn-warning'>Edit</button>","<button onclick='saveme(this)'class='btn btn-success'>Save</button>","<button onclick='deletMe(this)' class='btn btn-danger'>Delete</button>"]).draw();
 	}
-	;
 }
 
 function edit(me) {
