@@ -162,7 +162,7 @@ function handleResponseJQuery(myData) {
 	var t = $('#table').DataTable();
 	var i;
 	for(i =0;i<myData.length;i++){
-		t.row.add([ myData[i].trackID, myData[i].name,myData[i].artist,myData[i].album,myData[i].year,"<button onclick='edit(this)'class='btn btn-warning'>Edit</button>","<button onclick='saveme(this)'class='btn btn-success'>Save</button>","<button onclick='deletMe(this)' class='btn btn-danger'>Delete</button>"]).draw();
+		t.row.add([ myData[i].trackPersisId, myData[i].name,myData[i].artist,myData[i].album,myData[i].year,"<button onclick='edit(this)'class='btn btn-warning'>Edit</button>","<button onclick='saveme(this)'class='btn btn-success'>Save</button>","<button onclick='deletMe(this)' class='btn btn-danger'>Delete</button>"]).draw();
 	}
 }
 

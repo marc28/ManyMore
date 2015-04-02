@@ -18,13 +18,14 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 public class PlayList {
 	@Id
+	private String playlistPersistenceId;
 	private int playlistId;
 	private String name;
 	
 	@ManyToMany
 	@JoinTable(name ="playlist_track",
-			joinColumns={@JoinColumn(name="PLAY_ID", referencedColumnName="playlistId")},
-			 inverseJoinColumns={@JoinColumn(name="TRACK_ID", referencedColumnName="trackID")})
+			joinColumns={@JoinColumn(name="PLAY_ID", referencedColumnName="playlistPersistenceId")},
+			 inverseJoinColumns={@JoinColumn(name="TRACK_ID", referencedColumnName="trackPersisId")})
 	private List<Track> tracks = new ArrayList<>();
 	
 	@ManyToOne
@@ -36,6 +37,20 @@ public class PlayList {
 	public void addTrackToPlayList(Track t){
 		tracks.add(t);
 	}
+	
+	
+
+	public String getPlaylistPersistenceId() {
+		return playlistPersistenceId;
+	}
+
+
+
+	public void setPlaylistPersistenceId(String playlistPersistenceId) {
+		this.playlistPersistenceId = playlistPersistenceId;
+	}
+
+
 
 	public int getPlaylistId() {
 		return playlistId;

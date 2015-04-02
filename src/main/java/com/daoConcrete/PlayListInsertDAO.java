@@ -62,7 +62,7 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 	}
 
 	@Override
-	public void removePlaylist(int id) {
+	public void removePlaylist(String id) {
 		PlayList playlist = (PlayList)em.createQuery("from PlayList p where p.id = :id").setParameter("id", id).getSingleResult();
 		//System.out.println(playlist.getName());
 		em.remove(playlist);
@@ -70,7 +70,7 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 	}
 
 	@Override
-	public void saveEditPlaylist(int id, String name) {
+	public void saveEditPlaylist(String id, String name) {
 		PlayList playlist = (PlayList)em.createQuery("from PlayList p where p.id = :id").setParameter("id", id).getSingleResult();
 		playlist.setName(name);
 		em.merge(playlist);

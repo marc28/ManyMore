@@ -22,7 +22,7 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 public class Track {
 
 	@Id
-	@Column
+	private String trackPersisId;
 	private int trackID;
 	private String name = "Unknown Track Name";
 	private String artist = "Unknown artist";
@@ -39,6 +39,14 @@ public class Track {
 	private Library userTrack;
 	
 	
+	public String getTrackPersisId() {
+		return trackPersisId;
+	}
+
+	public void setTrackPersisId(String trackPersisId) {
+		this.trackPersisId = trackPersisId;
+	}
+
 	public int getTrackID() {
 		return trackID;
 	}

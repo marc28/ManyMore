@@ -114,14 +114,14 @@ public class playlistREST {
 	@GET
 	@Path("/pid")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void removePlaylist(@QueryParam("pid") int id) {
+	public void removePlaylist(@QueryParam("pid") String id) {
 		service.removePlaylist(id);
 	}
 
 	@GET
 	@Path("/editandsave")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void saveEditPlaylist(@QueryParam("pid") int id,
+	public void saveEditPlaylist(@QueryParam("pid") String id,
 			@QueryParam("name") String name) {
 		service.saveEditPlaylist(id, name);
 	}

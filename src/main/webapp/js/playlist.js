@@ -2,7 +2,7 @@
  * 
  */
 $(document).ready(function(){
-	getAllPlayListTrackInfo();
+	getAllPlayListNames();
 });
 
 function getAllPlayListTrackInfo() {
@@ -27,15 +27,6 @@ function getAllPlayListTrackInfo() {
 
 function handleResponseJQuery3(myData) {
 
-	/*
-	 * for (var i = 0; i < 200; i++) { $('#table-body').append("<tr>");
-	 * for(var j = 0;j<4;j++){ $('#table-body').append( "<td>" + myData[i][j] + "</td>"); }
-	 * $('#table-body').append("<td><button onclick='edit(this)'class='btn
-	 * btn-warning'>Edit</button></td>"); $('#table-body').append("<td><button
-	 * onclick='saveme(this)'class='btn btn-success'>Save</button></td>");
-	 * $('#table-body').append("<td><button onclick='deletMe(this)' class='btn
-	 * btn-danger'>Delete</button></td>"); $('#table-body').append("</tr>"); }
-	 */
 	var t = $('#table').DataTable();
 	var i;
 	for(i =0;i<500;i++){
@@ -44,7 +35,15 @@ function handleResponseJQuery3(myData) {
 		}
 	}
 }
+function getMyValue(){
+	var x = document.getElementById("mySelect").selectedIndex;
+	var playlistFromBox = document.getElementsByTagName("option")[x].value;
+	return playlistFromBox;
+}
 
+function test(){
+	alert(getMyValue());
+}
 function edit(me){
 	var parent = me.parentNode.parentNode;
 	var tdname = parent.children[1]; // get the user name node
@@ -73,19 +72,43 @@ function deletMe(el) {
 		});
 	}
 
-/*
- * $('#showPlaylists').click(function(){ getTheInfo(); });
- */
-/*
- * $( document ).ready(function() { getTheInfo(); });
- * 
- * function getTheInfo(){ var playId = $('#playID').val();
- * 
- * $.ajax({ type: 'GET', url: 'rest/playlist/pid?PID='+ playId, success:
- * handleResponseJQuery, contentType: 'application/json' }); }
- * 
- * function handleResponseJQuery(myData) {
- * 
- * for (var i = 0; i < myData.length; i++) { $('#table-body').append( "<tr>" + "<td>" +
- * myData[i].playlistId + "</td>" + "<td>" + myData[i].name + "</td>" + "<td>" + "</tr>"); } }
- */
+
+function getAllPlayListNames() {
+	var userEmail = "";
+	var cookies = document.cookie; // gets the cookie
+	var cookieArray = cookies.split(';');
+	for (var i = 0; i < cookieArray.length; i++) {
+		var key = cookieArray[i].split('=')[0];
+		key = key.trim();
+		var value = cookieArray[i].split('=')[1];
+		var valuesArray = value.split("---");
+		userEmail = decodeURI(valuesArray[0]);
+	}
+
+	$.ajax({
+		type : 'GET',
+		url : 'rest/playlist/namesdropdown?libid=' + userEmail,
+		success : handleResponseForDropDown,
+		contentType : 'application/json'
+	});
+}
+
+function handleResponseForDropDown(myData) {
+	var select = document.getElementById('mySelect');
+	for (var i = 0; i < myData.length; i++) {
+		var opt = myData[i];
+		var el = document.createElement("option");
+		el.textContent = opt;
+		el.value = opt;
+		select.appendChild(el);
+	}
+	var select2 = document.getElementById('mySelect2');
+	for (var j = 0; j < myData.length; j++) {
+		var opt2 = myData[j];
+		var el2 = document.createElement("option");
+		el2.textContent = opt2;
+		el2.value = opt2;
+		select2.appendChild(el2);
+	}
+	
+}

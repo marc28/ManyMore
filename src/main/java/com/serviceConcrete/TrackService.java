@@ -51,12 +51,12 @@ public class TrackService implements ITrackService{
 	 * Method to delete Track
 	 */
 	@Override
-	public void removeTrack(int id) {
+	public void removeTrack(String id) {
 		dao.removeTrack(id);		
 	}
 
 	@Override
-	public void saveEditTrack(int id,String name,String artist,String album) {
+	public void saveEditTrack(String id,String name,String artist,String album) {
 		dao.saveEditTrack(id,name,artist,album);
 		
 	}

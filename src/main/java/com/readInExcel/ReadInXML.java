@@ -49,7 +49,10 @@ public class ReadInXML {
 				for (int i = 0; i < listSize - 1; i += 2) {
 					Element node = (Element) trialFirst.get(i);
 					Element nodeInsert = (Element) trialFirst.get(i + 1);
-					if (node.getText().equals("Track ID"))
+					if(node.getText().equals("Persistent ID")){
+						track.setTrackPersisId(nodeInsert.getText());
+					}
+					else if (node.getText().equals("Track ID"))
 						track.setTrackID(Integer.parseInt(nodeInsert.getText()));
 					else if (node.getText().equals("Name"))
 						track.setName(nodeInsert.getText());
@@ -106,8 +109,9 @@ public class ReadInXML {
 					if (node.getText().equals("Name")) {
 						playlist.setName(nodeInsert.getText()); // working
 					} else if (node.getText().equals("Playlist ID"))
-						playlist.setPlaylistId(Integer.parseInt(nodeInsert
-								.getText())); // working
+						playlist.setPlaylistId(Integer.parseInt(nodeInsert.getText())); // working
+					else if (node.getText().equals("Playlist Persistent ID"))
+						playlist.setPlaylistPersistenceId(nodeInsert.getText()+j);
 				}
 				Element arrayNode = trialFirst.get(trialFirst.size() - 1);
 				List<Element> arrayNodeChildren = arrayNode.getChildren();

@@ -52,7 +52,7 @@ public class TrackDAO implements ITrackDAO{
 	}
 
 	@Override
-	public void removeTrack(int id) {
+	public void removeTrack(String id) {
 		Track removetrack = (Track) em.createQuery("from Track t where t.id = :id").setParameter("id",id).getSingleResult();
 		System.out.println(removetrack.getName());
 		em.remove(removetrack);
@@ -60,7 +60,7 @@ public class TrackDAO implements ITrackDAO{
 	}
 
 	@Override
-	public void saveEditTrack(int id,String name,String artist,String album) {
+	public void saveEditTrack(String id,String name,String artist,String album) {
 		
 		Track track = (Track) em.createQuery("from Track t where t.id = :id").setParameter("id",id).getSingleResult();
 		track.setName(name);

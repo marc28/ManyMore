@@ -30,7 +30,7 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public void removePlaylist(int id) {
+	public void removePlaylist(String id) {
 		 dao.removePlaylist(id);
 	}
 	
@@ -50,7 +50,7 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public void saveEditPlaylist(int id, String name) {
+	public void saveEditPlaylist(String id, String name) {
 		dao.saveEditPlaylist(id,name);
 		
 	}

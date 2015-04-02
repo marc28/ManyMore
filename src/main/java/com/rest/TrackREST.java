@@ -40,14 +40,14 @@ public class TrackREST {
 	@GET
 	@Path("/tid")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void removeTrack(@QueryParam("tid") int id) {
+	public void removeTrack(@QueryParam("tid") String id) {
 		service.removeTrack(id);
 	}
 
 	@GET
 	@Path("/editandsave")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void saveEditTrack(@QueryParam("tid") int id,
+	public void saveEditTrack(@QueryParam("tid") String id,
 			@QueryParam("name") String name,
 			@QueryParam("artist") String artist,
 			@QueryParam("album") String album) {
