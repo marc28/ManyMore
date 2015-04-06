@@ -48,26 +48,21 @@ public class UploadImportREST {
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
 		String filename = "C:/Users/marc/Documents/tracks.xml";
-		System.out.println("1");
 		if (form == null)
 			filename = "null.xml";
 		try {
-			System.out.println("2");
 			writeFile(form.getData(), filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 
 		}
-		System.out.println("3");
 		System.out.println("File Created");
 
 	}
 
 	private void writeFile(byte[] content, String fileName) throws IOException {
-		System.out.println("4");
 		File file = new File(fileName);
 		if (file.exists() == false) {
-			System.out.println("5");
 			file.createNewFile();
 		}
 		/*
@@ -75,14 +70,11 @@ public class UploadImportREST {
 		 * fop.write(content); fop.flush(); fop.close();
 		 */
 		char[] buffer = new char[content.length];
-		System.out.println("6");
 		for (int i = 0; i < buffer.length; i++) {
 			buffer[i] = (char) content[i];
 		}
 
-		System.out.println("Here");
-		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(file), "UTF-8"));
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(	new FileOutputStream(file), "UTF-8"));
 		out.write(buffer);
 		out.flush();
 		out.close();

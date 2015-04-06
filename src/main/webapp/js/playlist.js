@@ -2,7 +2,7 @@
  * 
  */
 $(document).ready(function(){
-	getAllPlayListNames();
+	getAllPlayListTrackInfo();
 });
 
 function getAllPlayListTrackInfo() {
