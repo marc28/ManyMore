@@ -37,14 +37,24 @@ function handleResponseForDropDown(myData) {
 }
 
 function insert() {
+	var userEmail = "";
+	var cookies = document.cookie; // gets the cookie
+	var cookieArray = cookies.split(';');
+	for (var i = 0; i < cookieArray.length; i++) {
+		var key = cookieArray[i].split('=')[0];
+		key = key.trim();
+		var value = cookieArray[i].split('=')[1];
+		var valuesArray = value.split("---");
+		userEmail = decodeURI(valuesArray[0]);
+	}
+	
 	box1Value = document.getElementById("searchTrack").value;
 	var x = document.getElementById("mySelect").selectedIndex;
 	var playlistFromBox = document.getElementsByTagName("option")[x].value;
 	if (box1Value != "" && playlistFromBox != "") {
 		$.ajax({
 			type : 'GET',
-			url : 'rest/playlist/insertingTrackToPlaylist?trackname='
-					+ box1Value + "&playlist=" + playlistFromBox,
+			url : 'rest/playlist/insertingTrackToPlaylist?libid=' + userEmail+'&trackname='+ box1Value + "&playlist=" + playlistFromBox,
 			success : function() {
 				alert(box1Value + " has been moved to the Playlist "
 						+ playlistFromBox);
@@ -58,14 +68,24 @@ function insert() {
 }
 
 function removeMe() {
+	var userEmail = "";
+	var cookies = document.cookie; // gets the cookie
+	var cookieArray = cookies.split(';');
+	for (var i = 0; i < cookieArray.length; i++) {
+		var key = cookieArray[i].split('=')[0];
+		key = key.trim();
+		var value = cookieArray[i].split('=')[1];
+		var valuesArray = value.split("---");
+		userEmail = decodeURI(valuesArray[0]);
+	}
+	
 	box1Value = document.getElementById("searchTrack").value;
 	var x = document.getElementById("mySelect").selectedIndex;
 	var playlistFromBox = document.getElementsByTagName("option")[x].value;
 	if (box1Value != "" && playlistFromBox != "") {
 		$.ajax({
 			type : 'GET',
-			url : 'rest/playlist/removeTrackFromPlaylist?trackname='
-					+ box1Value + "&playlist=" + playlistFromBox,
+			url : 'rest/playlist/removeTrackFromPlaylist?libid=' + userEmail+'&trackname='+ box1Value + "&playlist=" + playlistFromBox,
 			success : function() {
 				alert(box1Value + " has been removed to the Playlist "
 						+ playlistFromBox);

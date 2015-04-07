@@ -34,8 +34,7 @@ public class playlistREST {
 	@Path("/playlistnames")
 	@Produces(MediaType.APPLICATION_JSON)
 	// public Collection<PlayList> forDropdownMenu(@QueryParam("PID") int id) {
-	public Collection<PlayList> returnAllPlaylistsNames(
-			@QueryParam("libid") String userEmail) {
+	public Collection<PlayList> returnAllPlaylistsNames(@QueryParam("libid") String userEmail) {
 		if (userEmail != null) {
 			User u = userService.getUserEmail(userEmail);
 			if (u != null) {
@@ -49,20 +48,31 @@ public class playlistREST {
 	@GET
 	@Path("/insertingTrackToPlaylist")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void insertTrackIntoPlayList(
+	public void insertTrackIntoPlayList(@QueryParam("libid") String userEmail,
 			@QueryParam("trackname") String trackName,
 			@QueryParam("playlist") String playlistName) {
-		System.out.println("GAANNNNNJJJJJAAAAAA");
-		service.insertTrackIntoPlayList(trackName, playlistName);
+		if (userEmail != null) {
+			User u = userService.getUserEmail(userEmail);
+			if (u != null) {
+				service.insertTrackIntoPlayList(u.getLibraryid(),trackName, playlistName);
+			}
+		}
+		
+		
 	}
 
 	@GET
 	@Path("/removeTrackFromPlaylist")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void removeTrackFromPlaylist(@QueryParam("trackname") String trackName,
+	public void removeTrackFromPlaylist(@QueryParam("libid") String userEmail,@QueryParam("trackname") String trackName,
 			@QueryParam("playlist") String playlistName) {
-
-		service.removeTrackFromPlaylist(trackName, playlistName);
+		if (userEmail != null) {
+			User u = userService.getUserEmail(userEmail);
+			if (u != null) {
+				service.removeTrackFromPlaylist(u.getLibraryid(),trackName, playlistName);
+			}
+		}
+		
 	}
 
 	@GET

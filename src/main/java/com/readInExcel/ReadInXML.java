@@ -26,6 +26,27 @@ public class ReadInXML {
 		xmlFile = new File(fileName);
 		this.lidId = libId;
 	}
+	
+	public String getLibraryPersistenceId(){
+		String libraryId = "";
+		Document document;
+		try {
+			document = (Document) builder.build(xmlFile);
+			Element rootNode = document.getRootElement(); // 'plist'
+			Element firstDict = rootNode.getChild("dict"); // dict
+			List<Element> listFirstDicts = firstDict.getChildren("string");
+			libraryId = listFirstDicts.get(listFirstDicts.size()-1).getText();
+			
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return libraryId;
+	}
 
 	public ArrayList<Track> getAllTrackInoframtion() {
 		Document document;

@@ -19,6 +19,6 @@ public interface IPlaylistService {
 	public void removePlaylist(String id);
 	public void saveEditPlaylist(String id, String name);
 	Collection<String>getNamesFromPlayListOnly(int id);
-	void insertTrackIntoPlayList(String trackName, String playlistName);
-	public void removeTrackFromPlaylist(String trackName, String playlistName);
+	void insertTrackIntoPlayList(int id,String trackName, String playlistName);
+	public void removeTrackFromPlaylist(int id,String trackName, String playlistName);
 }

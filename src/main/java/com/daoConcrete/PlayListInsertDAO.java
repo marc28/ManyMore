@@ -78,10 +78,10 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 	}
 
 	@Override
-	public void insertTrackIntoPlayList(String trackName, String playlistName) {
-		List<Track> tracks = (List<Track>)em.createQuery("from Track t where t.name LIKE :trackName").setParameter("trackName", "%"+ trackName +"%").getResultList();
+	public void insertTrackIntoPlayList(int id,String trackName, String playlistName) {
+		List<Track> tracks = (List<Track>)em.createQuery("from Track t where t.userTrack.libID = :id AND t.name LIKE :trackName").setParameter("id", id).setParameter("trackName", "%"+ trackName +"%").getResultList();
 		//System.out.println("TRACK SIZE: " + tracks.size());
-		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.name LIKE :playlistName").setParameter("playlistName","%"+ playlistName +"%").getResultList();
+		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.userPlayList.libID = :id AND p.name LIKE :playlistName").setParameter("id", id).setParameter("playlistName","%"+ playlistName +"%").getResultList();
 		//System.out.println("PLAYLIST IZE: " + playlist.size());
 		if(tracks.size()>0 && playlist.size()>0){
 			PlayList p = playlist.get(0);//.add(tracks.get(0));
@@ -94,9 +94,9 @@ public class PlayListInsertDAO implements IPlaylistDAO {
 	}
 
 	@Override
-	public void removeTrackFromPlaylist(String trackName, String playlistName) {
-		List<Track> tracks = (List<Track>)em.createQuery("from Track t where t.name LIKE :trackName").setParameter("trackName", "%"+ trackName +"%").getResultList();
-		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.name LIKE :playlistName").setParameter("playlistName","%"+ playlistName +"%").getResultList();
+	public void removeTrackFromPlaylist(int id,String trackName, String playlistName) {
+		List<Track> tracks = (List<Track>)em.createQuery("from Track t where t.userTrack.libID = :id AND t.name LIKE :trackName").setParameter("id", id).setParameter("trackName", "%"+ trackName +"%").getResultList();
+		List<PlayList> playlist = (List<PlayList>)em.createQuery("from PlayList p where p.userPlayList.libID = :id AND p.name LIKE :playlistName").setParameter("id", id).setParameter("playlistName","%"+ playlistName +"%").getResultList();
 		if(tracks.size()>0 && playlist.size()>0){
 			
 			PlayList p = playlist.get(0);//.add(tracks.get(0));

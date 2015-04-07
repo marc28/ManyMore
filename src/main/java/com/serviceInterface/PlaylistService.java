@@ -61,14 +61,14 @@ public class PlaylistService implements IPlaylistService{
 	}
 
 	@Override
-	public void insertTrackIntoPlayList(String trackName, String playlistName) {
-		dao.insertTrackIntoPlayList(trackName, playlistName);
+	public void insertTrackIntoPlayList(int id,String trackName, String playlistName) {
+		dao.insertTrackIntoPlayList(id,trackName, playlistName);
 		
 	}
 
 	@Override
-	public void removeTrackFromPlaylist(String trackName, String playlistName) {
-		dao.removeTrackFromPlaylist(trackName,playlistName);
+	public void removeTrackFromPlaylist(int id, String trackName, String playlistName) {
+		dao.removeTrackFromPlaylist(id,trackName,playlistName);
 		
 	}
 
